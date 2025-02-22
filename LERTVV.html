@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квест для моей любимой</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .question { display: none; }
+        .visible { display: block; }
+        button { padding: 10px; margin-top: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Квест для моей любимой!</h1>
+    <div id="q1" class="question visible">
+        <p>Когда мы начали встречаться?</p>
+        <button onclick="checkAnswer(1, '6 октября 2023')">6 октября 2023</button>
+        <button onclick="checkAnswer(1, '14 февраля 2023')">14 февраля 2023</button>
+        <button onclick="checkAnswer(1, '1 января 2024')">1 января 2024</button>
+    </div>
+    
+    <div id="q2" class="question">
+        <p>Какое у меня второе имя?</p>
+        <button onclick="checkAnswer(2, 'Глеб')">Глеб</button>
+        <button onclick="checkAnswer(2, 'Александр')">Александр</button>
+        <button onclick="checkAnswer(2, 'Дмитрий')">Дмитрий</button>
+    </div>
+    
+    <div id="q3" class="question">
+        <p>Какое моё любимое блюдо?</p>
+        <button onclick="checkAnswer(3, 'Лазанья')">Лазанья</button>
+        <button onclick="checkAnswer(3, 'Крылышки')">Крылышки</button>
+        <button onclick="checkAnswer(3, 'Борщ')">Борщ</button>
+        <button onclick="checkAnswer(3, 'Суши')">Суши</button>
+    </div>
+    
+    <div id="q4" class="question">
+        <p>Какое моё любимое аниме?</p>
+        <button onclick="checkAnswer(4, 'Мастера меча онлайн')">Мастера меча онлайн</button>
+        <button onclick="checkAnswer(4, 'Атака титанов')">Атака титанов</button>
+        <button onclick="checkAnswer(4, 'Тетрадь смерти')">Тетрадь смерти</button>
+    </div>
+    
+    <div id="q5" class="question">
+        <p>Какого числа я родился?</p>
+        <button onclick="checkAnswer(5, '27 апреля 2007')">27 апреля 2007</button>
+        <button onclick="checkAnswer(5, '15 мая 2006')">15 мая 2006</button>
+        <button onclick="checkAnswer(5, '3 марта 2008')">3 марта 2008</button>
+    </div>
+    
+    <div id="final" class="question">
+        <h2>Поздравляю, ты прошла квест!</h2>
+        <p>А теперь смотри моё видео-поздравление и читай мой сюрприз для тебя!</p>
+        <video controls>
+            <source src="" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <p></p>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        function checkAnswer(questionNumber, answer) {
+            const correctAnswers = {
+                1: '6 октября 2023',
+                2: 'Глеб',
+                3: ['Лазанья', 'Крылышки', 'Борщ'],
+                4: 'Мастера меча онлайн',
+                5: '27 апреля 2007'
+            };
+            
+            if ((Array.isArray(correctAnswers[questionNumber]) && correctAnswers[questionNumber].includes(answer)) || correctAnswers[questionNumber] === answer) {
+                document.getElementById(`q${questionNumber}`).classList.remove('visible');
+                currentQuestion++;
+                if (document.getElementById(`q${currentQuestion}`)) {
+                    document.getElementById(`q${currentQuestion}`).classList.add('visible');
+                } else {
+                    document.getElementById('final').classList.add('visible');
+                }
+            } else {
+                alert('Неправильный ответ! Попробуй ещё раз.');
+            }
+        }
+    </script>
+</body>
+</html>
